@@ -52,6 +52,11 @@ public class PrometheusFormatter {
                 .map(entry -> {
                     final Metadata metadata = metadatas.get(entry.getKey());
                     final Metric value = entry.getValue();
+
+                    if (value == null) {
+                        return new StringBuilder();
+                    }
+
                     switch (metadata.getTypeRaw()) {
                         case COUNTER: {
                             final String key = toPrometheusKey(metadata);
